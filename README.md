@@ -13,3 +13,15 @@ python tool to convert pdf documents to booklet pdfs
  - **requirements.txt**
 
    Use `$ pip install -r requirements.txt` to install additional dependencies
+
+## Usage
+  
+  - Fire up `Pdf2Booklet.py`
+  
+  ![image](https://user-images.githubusercontent.com/84170133/132122699-7046b915-9f7f-430e-9d82-cec0c17c10ee.png)
+  
+  - Load pdf file by clicking on load button
+  - Set required dpi (default 100)
+  - Set save path by clicking on save button
+  - Done!!
+
