@@ -22,7 +22,7 @@ python tool to convert pdf documents to booklet pdfs
   
   - Load pdf file by clicking on load button
   - Set required page size (*default A4*)
-  - Set required dpi (*default 100*)
+  - Set required dpi to load pdf in (*default 100*)
   - Set save path by clicking on save button
   - Done!!
 
