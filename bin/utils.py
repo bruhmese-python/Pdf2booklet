@@ -10,13 +10,12 @@ from tkinter import messagebox
 from multiprocessing.pool import ThreadPool
 pool = ThreadPool(processes=1)
 
+SIZE = {'A4': (11.7, 8.3),
+        'A5': (8.3, 5.8),
+        'A6': (5.8, 4.1),
+        'A7': (4.1, 2.9)
+        }
 
-SIZE = dict([
-    ['A4', (3500, 2480)],
-    ['A5', (2480, 1748)],
-    ['A6', (1748, 1240)],
-    ['A7', (1240, 874)],
-])
 
 WIDTH, HEIGHT = 0, 1
 
@@ -68,7 +67,6 @@ class App:
         GButton_841.place(x=220, y=100, width=73, height=30)
         GButton_841["command"] = lambda *args: self.GButton_841_command(root)
 
-###############################################################################
         self.GLabel_828 = tk.Label(root)
         self.GLabel_828["fg"] = "#333333"
         self.GLabel_828["text"] = ""
@@ -82,10 +80,10 @@ class App:
         self.page_size = ttk.Combobox(root, width=5, state="readonly")
 
         # Adding combobox drop down list
-        self.page_size['values'] = ('A4', 'A5', 'A6', 'A7')
+        self.page_size['values'] = tuple(SIZE.keys())
         self.page_size.place(x=320, y=70)
 
-        # Shows february as a default value
+        # Shows A4 as a default value
         self.page_size.current(0)
 
         GLabel_70 = tk.Label(root)
@@ -115,9 +113,8 @@ class App:
         GLabel_163.place(x=350, y=100, width=35, height=30)
 
         self.Gtext_dpi = tk.Text(root)
-        self.Gtext_dpi.insert(1.0, 100)
+        self.Gtext_dpi.insert(1.0, 300)
         self.Gtext_dpi.place(x=325, y=100, width=35, height=20)
-###############################################################################
 
     def GButton_958_command(self):
         self.PATH = tk.filedialog.askopenfilename()
@@ -136,10 +133,19 @@ class App:
                 self.GLabel_574.place(x=0, y=0, width=380, height=157)
 
                 self.GLabel_44["text"] = self.SAVEPATH
+                req_DPI = int(self.Gtext_dpi.get(1.0, END))
+                for items in SIZE:
+                    vals = SIZE[items]
+                    vals = tuple(
+                        map(lambda x: int(x * req_DPI), vals))
+                    SIZE[items] = vals
+
                 self.main_function(self.PATH, self.SAVEPATH,
-                                   self.page_size.get(), int(self.Gtext_dpi.get(1.0, END)))
+                                   self.page_size.get(), req_DPI)
                 messagebox.showinfo("Conversion complete",
                                     "File saved as " + self.SAVEPATH + ".pdf")
+                globals()['SIZE'] = {'A4': (11.7, 8.3), 'A5': (8.3, 5.8),
+                                     'A6': (5.8, 4.1), 'A7': (4.1, 2.9)}
                 self.GLabel_574.destroy()
         else:
             messagebox.showerror("Error", "Error : Bad Path")
