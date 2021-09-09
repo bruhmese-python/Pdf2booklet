@@ -1,7 +1,7 @@
 # Pdf2booklet
 python tool to convert pdf documents to booklet pdfs
 <p align="center">
-  <img src="https://helpx.adobe.com/acrobat/kb/print-booklets-acrobat-reader/_jcr_content/main-pars/image.img.png/booklet_v3.png"/>
+  <img src="https://github.com/bruhmese-python/Pdf2booklet/blob/main/src/pdf2booklet.png"/>
 </p>
  
 ## Requirements
