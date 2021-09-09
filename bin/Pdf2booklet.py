@@ -90,7 +90,7 @@ def main_function(PDF_FILE: str, SAVE_PATH: str, PAGE_SIZE: str, DPI: int):
             lambda *args: Image.open(combine_images(pages[0], pages[1], PAGE_SIZE)), (8,))
         COMBINED_list.append(thread1.get())
     newpdf_name = "OUT_B00kified.pdf"
-    COMBINED_list[0].save(newpdf_name, "PDF", resolution=100.0,
+    COMBINED_list[0].save(newpdf_name, "PDF", resolution=DPI,
                           save_all=True, append_images=COMBINED_list[1:])
     copy2(newpdf_name, SAVE_PATH + ".pdf")
     chdir(parent_dir)
